@@ -1,0 +1,73 @@
+<div class="min-vh-100 bg-light booksContainer">
+
+<app-navigation [menu]="[
+  {label:'Domov', url:'/home'},
+  {label:'Knihy', url:'/books'}]">
+</app-navigation>
+
+  <section class="jumbotron d-flex align-items-center text-center">
+    <div class="container">
+      <div class="row d-flex justify-content-center">
+        <h1>Knihy</h1>
+      </div>
+      <div class="row d-flex justify-content-center">
+        <p class="lead text font-weight-normal">
+          V tejto sekcii sa nachádzajú všetky knihy. Môžete tu nájsť veľa skvelých a populárnych titulov.
+        </p>
+      </div>
+      <div class="row d-flex justify-content-center">
+        <div class="col-sm-6 col-lg-4">
+          <input class="form-control " type="text" placeholder="Zadaj názov alebo meno autora..." [(ngModel)]="searchTitle">
+        </div>
+      </div>
+    </div>
+  </section>
+
+<div class="album py-5">
+  <div class="container ">
+
+    <div class="row">
+      <div class="col-sm-12 "  *ngFor="let book of books | searchBooks: searchTitle">
+        <div class="row mb-5 shadow-sm ">
+          <div class="col-sm-3 mb-2 mt-2" alt="card-image">
+            <svg class="bd-placeholder-img " width="100%" height="150" role="img" ><rect width="100%" height="100%" fill="#484c4f"></rect><text x="41%" y="50%" fill="#eceeef" dy=".3em">Image</text></svg>
+          </div>
+
+          <div class="col-sm-9">
+            <div class="card-body text-truncate">
+              <div class="row">
+                <h5 class="card-title mb-1">{{book.title}}</h5>
+              </div>
+              <div class="row">
+                <p class="text-muted mb-1">{{book.author}}</p>
+              </div>
+              <div class="row">
+                <p class="card-text text-truncate">{{book.plot}}</p>
+              </div>
+
+
+
+              <div class="row mt-3">
+                <div class="col-sm-3 col-10 btn-group px-0 ">
+                  <a class="btn btn-sm btn-outline-primary detail" (click)="openDetail(book)" title="Zobraziť detail">Detail</a>
+                  <a *ngIf="!this.getAuthService.isUserAdmin() && !book.isLiked; else isLiked" class="btn btn-sm btn-outline-primary like" (click)="likeNewBook(book)">Obľúbiť</a>
+                  <ng-template #isLiked>
+                    <a *ngIf="!this.getAuthService.isUserAdmin()" class="btn btn-sm btn-primary liked" title="Zrušiť obľúbenie" (click)="unlikeBook(book)">Obľúbené</a>
+                  </ng-template>
+                  <a *ngIf="this.getAuthService.isUserAdmin()" class="btn btn-sm btn-outline-primary update" (click)="updateDetail(book)">Upraviť</a>
+                </div>
+                <div class="col-1 offset-sm-8"><a *ngIf="this.getAuthService.isUserAdmin()" class="btn btn-sm" (click)="deleteBook(book.id)"><i class="fa fa-trash"></i></a></div>
+
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+<app-footer></app-footer>

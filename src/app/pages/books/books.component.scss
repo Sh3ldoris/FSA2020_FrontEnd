@@ -1,0 +1,36 @@
+.btn-group {
+  color: #007bff;
+  .liked {
+     color: white;
+   }
+}
+
+.btn-group a.detail:hover {
+
+  color: white;
+}
+
+.btn-group a.like:hover {
+  color: white;
+}
+
+.btn-group a.update:hover {
+  color: white;
+}
+
+.btn-group a.liked:hover {
+  background-color: #f8f9fa;
+  color: #007bff;
+}
+
+.trash {
+  color: #007bff;
+}
+
+
+.jumbotron {
+  background: url('src/assets/books-new2.jpg') no-repeat center center;
+  background-size: cover;
+  height: 48vh;
+  color: #ffffff;
+}

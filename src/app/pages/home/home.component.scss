@@ -1,0 +1,71 @@
+
+.jumbotron {
+  background: url('src/assets/books-new2.jpg') no-repeat center center;
+  background-size: cover;
+  height: 48vh;
+}
+
+.lead {
+  color: white;
+}
+
+.body-heading {
+  padding-top: 8vh;
+  height: 41vh;
+}
+
+.body-text {
+  font-size: 20px;
+}
+
+.body-title {
+  color: #2063c5;
+}
+
+ hr {
+  border-width: 3px;
+}
+
+
+.crop-text-2 {
+  -webkit-line-clamp: 3;
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+
+@media screen and (max-width: 900px) {
+  .logo {
+    width: 200px;
+    height: 100px;
+  }
+
+  .lead {
+    font-weight: 400;
+    font-size: 18px;
+  }
+
+  .btn-lg {
+    font-weight: 400;
+    font-size: 18px;
+  }
+
+  .body-heading {
+    padding-top: 3vh;
+    height: 41vh;
+  }
+
+  .body-title {
+    font-size: 28px;
+  }
+
+  .body-text {
+    font-size: 18px;
+  }
+
+}
+
+
+

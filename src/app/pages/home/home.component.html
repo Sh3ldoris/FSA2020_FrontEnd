@@ -1,0 +1,66 @@
+<div class="min-vh-100 bg-light homeContainer">
+
+  <app-navigation [menu]="[
+  {label:'Domov', url:'/home'},
+  {label:'Knihy', url:'/books'}]">
+  </app-navigation>
+
+<section class="jumbotron text-center">
+  <div class="container ">
+    <div class="row justify-content-center">
+      <img class="img-fluid logo mt-3" src="assets/logo-big.png" width="250" height="150">
+    </div>
+    <div class="row justify-content-center mb-3">
+      <p class="lead text font-weight-normal">
+        Vítajte na QBrary. Online knižnica, kde nájdete všetky druhy literarúry.
+      </p>
+    </div>
+
+
+      <div *ngIf="!getAuthService.isUserLoggedIn(); else loggedButtons" class="row d-flex justify-content-around">
+        <a class="btn btn-lg btn-light my-3  col-5  col-md-3" [routerLink]="'/signin'">Už mám účet!</a>
+        <a class="btn btn-lg btn-secondary my-3 col-5 col-md-3" [routerLink]="'/registration'">Chcem si vytvoriť účet!</a>
+      </div>
+      <ng-template #loggedButtons>
+        <div class="row d-flex justify-content-around">
+            <a class="btn btn-lg btn-light my-3  col-5  col-md-3" [routerLink]="'/books'">Zoznam kníh</a>
+            <a *ngIf="!this.getAuthService.isUserAdmin() && this.getAuthService.isUserLoggedIn()" class="btn btn-lg btn-secondary my-3 col-5 col-md-3" [routerLink]="'/likes'">Vaše obľúbené</a>
+        </div>
+      </ng-template>
+
+  </div>
+</section>
+
+  <div class="container text-center body-heading">
+    <div class="mb-5">
+      <h2 class="body-title mt-3">Je to jednoduché, stačí sa zaregistrovať a ihneď si môžete vyhľadávať svoje obľúbené tituly.</h2>
+      <p class="body-text mt-5">Pre dalšie skvelé, voľne prístupné tituly prejdi do sekcie Knihy</p>
+      <hr class="mt-4 mx-5" role="presentation">
+    </div>
+  </div>
+
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-md-4" *ngFor="let book of books; let i = index">
+        <div *ngIf="i < 3">
+        <div class="card mb-4 shadow-sm">
+          <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#484c4f"></rect><text x="44%" y="50%" fill="#eceeef" dy=".3em">Image</text></svg>
+          <div class="card-body">
+            <h4 class="mb-3 text-truncate">{{book.title}}</h4>
+            <p class="card-text crop-text-2 text-truncate">{{book.plot}}</p>
+            <div class="d-flex justify-content-between align-items-center">
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+  </div>
+
+</div>
+<app-footer></app-footer>
+
+
+
+
+

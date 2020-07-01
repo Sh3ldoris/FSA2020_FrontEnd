@@ -1,0 +1,24 @@
+<div class="d-flex justify-content-center align-items-center min-vh-100 text-center loginView">
+
+  <div class="col-sm-4 col-xl-2 col-sm-offset-4 col-lg-offset-5 mb-5 mx-3 shadow loginForm">
+
+    <form class="my-3 mx-1" (ngSubmit)="submit()" [formGroup]="form">
+      <img class="mb-2" src="assets/logo.png" alt="" width="72" height="72" [routerLink]="'/'">
+      <h1 class="h3 mb-3 font-weight-normal">Prihláste sa</h1>
+      <div class="form-group mb-2">
+        <input type="text" class="form-control" placeholder="Meno" formControlName="username"
+               [class.is-invalid]="!isLoginInformationRight">
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" placeholder="Heslo" formControlName="password"
+            [class.is-invalid]="!isPasswordRight">
+      </div>
+      <button [disabled]="form.invalid" type="submit" class="btn btn-primary btn-lg btn-block">Prihlásiť</button>
+
+      <div *ngIf="!isPasswordRight"><p class="text-danger mt-3">Ľutujeme, zadané heslo je nesprávne. Dôkladne ho skontrolujte.</p></div>
+      <div *ngIf="!isLoginInformationRight"><p class="text-danger mt-3">Používateľ, ktorého ste zadali, nepatrí k účtu. Skontrolujte svoje používateľské meno a skúste znova.</p></div>
+      <p class="mt-5 mb-3 text-muted">© 2020 Lany</p>
+    </form>
+  </div>
+</div>
+

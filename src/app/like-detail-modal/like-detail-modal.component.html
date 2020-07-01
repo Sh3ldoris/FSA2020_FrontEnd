@@ -1,0 +1,59 @@
+<div class="modal-body ">
+  <div class="row">
+    <div class="col-12 mb-2">
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+  </div>
+
+
+  <div class="row mx-md-2">
+
+    <div class="col-5" alt="card-image">
+      <svg class="bd-placeholder-img " width="100%" height="150" role="img" ><rect width="100%" height="100%" fill="#55595c"></rect><text x="35%" y="50%" fill="#eceeef" dy=".3em">Image</text></svg>
+    </div>
+
+    <div class="col-7 body" alt="card-body">
+      <div class="card-body">
+        <h5 class="card-title mb-0">{{like.book.title}}</h5>
+        <p class="text-muted mb-2">{{like.book.author}}</p>
+        <p class="card-text">ISBN: {{like.book.isbn}}</p>
+        <a class="btn btn-sm btn-primary liked" title="Zrušiť obľúbenie" (click)="unlikeBook(like.book)">Obľúbené</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-md-2 detailNotes overflow-auto">
+    <div class="col-12 mt-2">
+      <h4>Tvoje postrehy:</h4>
+      <p *ngIf="!isNoteUpdating && this.like.notes !== ''; else AddNotes" class="text-justify">{{this.like.notes}}</p>
+      <a *ngIf="!isNoteUpdating && this.like.notes !== ''" class="btn btn-sm btn-primary save mb-2" (click)="addNote()">Upraviť</a>
+      <ng-template #AddNotes>
+        <p *ngIf="!isNoteUpdating">Ešte si nepridal žiadnu poznámu ku tejto knihe...</p>
+        <a *ngIf="!isNoteUpdating" class="btn btn-sm btn-primary save mb-2" (click)="addNote()">Zmeň to!</a>
+      </ng-template>
+
+      <form [formGroup]="form" *ngIf="isNoteUpdating">
+        <textarea class="form-control" id="PlotTextArea" rows="4" placeholder="Sem môžeš písať svoje postrehy" title="Plot" formControlName="notes"></textarea>
+        <button type="submit" class="btn btn-sm btn-primary save mt-2" title="Uložiť" (click)="updateNote()">Uložiť</button>
+        <button class="btn btn-sm btn-primary save mt-2 ml-2" title="Zrušiť" (click)="this.isNoteUpdating=false">Zrušiť</button>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="row mx-md-2 detailPlot overflow-auto">
+    <div class="col-12 mt-2">
+      <h4>Viac o knihe:</h4>
+      <p class="text-justify">{{like.book.plot}}</p>
+
+    </div>
+  </div>
+
+</div>
+<div class="modal-footer">
+
+</div>
+

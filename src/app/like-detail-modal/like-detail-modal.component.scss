@@ -1,0 +1,28 @@
+.detailPlot {
+  max-height: 20vh;
+  overflow-y: scroll;
+}
+
+.detailNotes {
+  max-height: 30vh;
+  overflow-y: scroll;
+}
+
+.liked {
+    color: white;
+  }
+
+.liked:hover {
+  background-color: #f8f9fa;
+  color: #007bff;
+}
+
+.save {
+  background-color: white;
+  color: #007bff;
+}
+
+.save:hover {
+  background-color: #007bff;
+  color: white;
+}

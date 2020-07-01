@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary body">
+  <div class="container-xl">
+    <a class="navbar-brand mb-1" href="#">QBrary</a>
+    <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
+      <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="'/home'">
+            Domov
+          </a>
+        </li>
+
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="'/books'">
+            Knihy
+          </a>
+        </li>
+
+        <li *ngIf="getAuthService.isUserLoggedIn() && !getAuthService.isUserAdmin()" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="'/likes'">
+            Obľúbené
+          </a>
+        </li>
+      </ul>
+      <p *ngIf="getAuthService.isUserLoggedIn()" class="mr-3 mt-3 userName">Prihlásený ako: {{this.getTokenStorage.getUsername()}}</p>
+      <a *ngIf="getAuthService.isUserLoggedIn() && getAuthService.isUserAdmin()" class="btn btn-light btn-sm btn-outline-primary mr-3 addBook"
+        (click)="openNewBookForm()">
+        Pridať knihu
+      </a>
+      <button *ngIf="getAuthService.isUserLoggedIn(); else loginBtn" (click)="getTokenStorage.signOut()" class="btn btn-light btn-sm btn-outline-primary" >Odhlásiť sa</button>
+      <ng-template #loginBtn>
+        <a class="btn btn-light btn-sm btn-outline-primary mr-3" [routerLink]="'/registration'">Registrácia</a>
+        <a class="btn btn-light btn-sm btn-outline-primary" [routerLink]="'/signin'">Prihlásenie</a>
+      </ng-template>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,67 @@
+<div class="min-vh-100 bg-light likedBooksContainer">
+
+<app-navigation [menu]="[
+  {label:'Domov', url:'/home'},
+  {label:'Knihy', url:'/books'}]">
+</app-navigation>
+
+  <section class="jumbotron d-flex align-items-center text-center">
+    <div class="container">
+      <div class="row d-flex justify-content-center">
+        <h1>Obľúbené knihy</h1>
+      </div>
+      <div class="row d-flex justify-content-center">
+        <p class="lead text font-weight-normal">
+          V tejto sekcii sa nachádzajú všetky Vaše obľúbené tituly.
+          Môžete si ku nim pridávať všeky vaše postrehy a zaujímavosti v podobe poznámok
+        </p>
+      </div>
+      <div class="row d-flex justify-content-center">
+        <div class="col-sm-6 col-lg-4">
+          <input class="form-control " type="text" placeholder="Zadaj názov alebo meno autora..." [(ngModel)]="searchTitle">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<div class="album py-5 bg-light">
+  <div class="container">
+
+    <div class="row">
+      <div *ngIf="this.likedBooks.length === 0" class="col-12 text-center">
+        <h3>Nemáš žiadne obľúbené knihy</h3>
+      </div>
+      <div class="col-sm-12" alt="card" *ngFor="let like of likedBooks | searchLikedBook: searchTitle">
+        <div class="row mb-5 shadow-sm ">
+          <div class="col-sm-3 mb-2 mt-2" alt="card-image">
+            <svg class="bd-placeholder-img " width="100%" height="150" role="img" ><rect width="100%" height="100%" fill="#484c4f"></rect><text x="41%" y="50%" fill="#eceeef" dy=".3em">Image</text></svg>
+          </div>
+
+          <div class="col-sm-9">
+            <div class="card-body text-truncate">
+              <h5 class="card-title mb-1 text-truncate">{{like.book.title}}</h5>
+              <p class="text-muted mb-2 text-truncate">{{like.book.author}}</p>
+              <p *ngIf="like.notes !== ''; else AddNotes" class="text-justify text-truncate">{{like.notes}}</p>
+              <ng-template #AddNotes>
+                <p class="text-truncate">Ešte si nepridal žiadnu poznámu ku tejto knihe...</p>
+              </ng-template>
+
+              <div class="btn-group">
+                <a class="btn btn-sm btn-outline-primary detail"  title="Zobraziť detail" (click)="openDetail(like)">Detail</a>
+                <a class="btn btn-sm btn-primary liked" title="Zrušiť obľúbenie" (click)="unlikeBook(like)">Obľúbené</a>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</div>
+<app-footer></app-footer>
